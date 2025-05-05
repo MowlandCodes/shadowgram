@@ -1,5 +1,8 @@
 # List of ignored files and directories
 venv/
+.env
+config/__pycache__
+handlers/__pycache__
 
 # List of unignored files
 !.gitignore
