@@ -3,6 +3,7 @@ venv/
 .env
 config/__pycache__
 handlers/__pycache__
+*.log
 
 # List of unignored files
 !.gitignore
