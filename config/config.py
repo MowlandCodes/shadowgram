@@ -11,7 +11,6 @@ init()
 BOT_TOKEN = str(os.environ.get("BOT_TOKEN"))
 BOT_USERNAME = str(os.environ.get("BOT_USERNAME"))
 CHAT_ID = str(os.environ.get("CHAT_ID"))
-OP_ID = str(os.environ.get("OP_ID"))
 
 # Victim Bot (To interact with victim)
 ALPHA_BOT_TOKEN = str(os.environ.get("ALPHA_BOT_TOKEN"))
