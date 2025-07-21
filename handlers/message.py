@@ -13,9 +13,10 @@ def handle_text_message(text) -> str:
         case _:
             return "I don't understand what you're trying to say."
 
+
 async def message_handlers(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    message_type = update.message.chat.type
-    text = update.message.text
+    message_type: str = update.message.chat.type
+    text: str = update.message.text
     sender_id = update.message.chat.id
 
     print(f"User: ({sender_id}) in {message_type}: '{text}'")
