@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from config import BOT_USERNAME
+from config import BOT_USERNAME, log_gram
 
 
 def handle_text_message(text) -> str:
@@ -17,9 +17,8 @@ def handle_text_message(text) -> str:
 async def message_handlers(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     message_type: str = update.message.chat.type
     text: str = update.message.text
-    sender_id = update.message.chat.id
-
-    print(f"User: ({sender_id}) in {message_type}: '{text}'")
+    sender_id = update.message.from_user.id
+    message_title = update.message.chat.title
 
     if message_type == "group" or message_type == "supergroup":
         if BOT_USERNAME in text:
@@ -31,5 +30,6 @@ async def message_handlers(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         response = handle_text_message(text)
 
     # Bot response
-    print(f"Bot: '{response}'")
+    log_gram.info(f"User: ({sender_id}) in Chat({message_title}): '{text}'")
+    log_gram.info(f"Bot: '{response}'")
     await update.message.reply_text(response)
