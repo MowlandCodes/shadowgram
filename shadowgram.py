@@ -15,4 +15,4 @@ if __name__ == "__main__":
     bot.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, message_handlers))
 
     print(f"{LOG_GREEN('SUCCESS')} Running Shadowgram Bot...")
-    bot.run_polling(poll_interval=3, allowed_updates=Update.ALL_TYPES)
+    bot.run_polling(poll_interval=2, allowed_updates=Update.ALL_TYPES)
