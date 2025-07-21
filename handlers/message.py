@@ -5,9 +5,13 @@ from config import BOT_USERNAME
 
 
 def handle_text_message(text) -> str:
-    if "are you online?" in text.lower():
-        return "I'm online."
+    message = text.lower()
 
+    match message:
+        case "are you online?":
+            return "I'm Online!"
+        case _:
+            return "I don't understand what you're trying to say."
 
 async def message_handlers(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     message_type = update.message.chat.type
