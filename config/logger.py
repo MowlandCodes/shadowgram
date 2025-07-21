@@ -1,0 +1,36 @@
+import logging
+import time
+
+from colorama import Fore, Style
+
+
+class LogFormatter(logging.Formatter):
+    debug = Fore.WHITE
+    informative = Fore.BLUE
+    warning = Fore.YELLOW
+    error = Fore.RED
+    critical = Fore.RED + Style.BRIGHT
+    format = f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - %(name)s - [%(levelname)s]: %(message)s"
+    datefmt = "%d-%b-%Y %H:%M:%S"
+
+    FORMATS = {
+        logging.DEBUG: f"{debug}{format}{Style.RESET_ALL}",
+        logging.INFO: f"{informative}{format}{Style.RESET_ALL}",
+        logging.WARNING: f"{warning}{format}{Style.RESET_ALL}",
+        logging.ERROR: f"{error}{format}{Style.RESET_ALL}",
+        logging.CRITICAL: f"{critical}{format}{Style.RESET_ALL}",
+    }
+
+    def format(self, record):
+        log_fmt = self.FORMATS.get(record.levelno)
+        formatter = logging.Formatter(log_fmt, self.datefmt)
+        return formatter.format(record)
+
+
+# Initializing Logger
+log_gram = logging.getLogger("Shadowgram")
+log_gram.setLevel(logging.DEBUG)
+
+handler = logging.StreamHandler()
+handler.setFormatter(LogFormatter())
+log_gram.addHandler(handler)
