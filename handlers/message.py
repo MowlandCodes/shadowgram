@@ -20,7 +20,7 @@ async def message_handlers(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 
     print(f"User: ({sender_id}) in {message_type}: '{text}'")
 
-    if message_type == "group":
+    if message_type == "group" or message_type == "supergroup":
         if BOT_USERNAME in text:
             response = text.replace(BOT_USERNAME, "").strip()
             response = handle_text_message(response)
