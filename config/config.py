@@ -21,3 +21,10 @@ ALPHA_BOT_USERNAME = str(os.environ.get("ALPHA_BOT_USERNAME"))
 LOG_RED = lambda x: f"{Back.RED}{Fore.BLACK}{Style.BRIGHT} {x} {Style.RESET_ALL}"
 LOG_YELLOW = lambda x: f"{Back.YELLOW}{Fore.BLACK}{Style.BRIGHT} {x} {Style.RESET_ALL}"
 LOG_GREEN = lambda x: f"{Back.GREEN}{Fore.BLACK}{Style.BRIGHT} {x} {Style.RESET_ALL}"
+
+HELP_TEXT = r"""*🤖 Shadowgram Bot 1\.0 🤖*
+
+*List of Commands*:
+/start \- Starts the Shadowgram Bot
+/help \- Show this help message
+"""
