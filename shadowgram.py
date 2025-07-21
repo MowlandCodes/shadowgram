@@ -4,7 +4,7 @@ from telegram import Update
 from telegram.ext import (ApplicationBuilder, CommandHandler, MessageHandler,
                           filters)
 
-from config import BOT_TOKEN, LOG_GREEN, LOG_YELLOW, log_gram
+from config import BOT_TOKEN, log_gram
 from handlers import help_command, message_handlers, start_command
 
 if __name__ == "__main__":
