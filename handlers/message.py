@@ -25,7 +25,7 @@ async def message_handlers(update: Update, context: ContextTypes.DEFAULT_TYPE) -
             response = text.replace(BOT_USERNAME, "").strip()
             response = handle_text_message(response)
         else:
-            return
+            response = handle_text_message(text)
     else:
         response = handle_text_message(text)
 
