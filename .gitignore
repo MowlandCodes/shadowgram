@@ -7,3 +7,4 @@ handlers/__pycache__
 
 # List of unignored files
 !.gitignore
+implant/bin
