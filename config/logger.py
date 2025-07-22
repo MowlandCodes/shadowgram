@@ -47,7 +47,9 @@ class ConsoleFormatter(logging.Formatter):
 
 # Initializing Logger
 log_gram = logging.getLogger("Shadowgram")
-log_gram.setLevel(logging.DEBUG)
+log_gram.setLevel(
+    logging.DEBUG
+)  # For debug purpose (change to logging.WARNING for production)
 
 stream_handler = logging.StreamHandler()
 stream_handler.setFormatter(ConsoleFormatter())
