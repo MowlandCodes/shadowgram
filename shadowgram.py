@@ -5,8 +5,8 @@ from telegram.ext import (ApplicationBuilder, CommandHandler, MessageHandler,
                           filters)
 
 from config import BOT_TOKEN, log_gram
-from handlers import (help_command, interact_command, message_handlers,
-                      shell_command, start_command)
+from handlers import (help_command, interact_command, list_command,
+                      message_handlers, shell_command, start_command)
 
 if __name__ == "__main__":
     # Initializing the Bot
@@ -18,6 +18,7 @@ if __name__ == "__main__":
     bot.add_handler(CommandHandler("help", help_command))
     bot.add_handler(CommandHandler("interact", interact_command))
     bot.add_handler(CommandHandler("shell", shell_command))
+    bot.add_handler(CommandHandler("list", list_command))
 
     # Message Handlers
     bot.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, message_handlers))
