@@ -1,24 +1,30 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 CWD=${PWD}
 BIN="implant"
 BINDIR="bin"
-FLAGS="-d:release -d:ssl -d:nimOldCaseObjects"
+FLAGS="-d:release -d:ssl -d:nimOldCaseObjects --opt:size -d:danger --passC:-O3"
 
 # Check for dependencies
-nimble install dotenv telebot
+nimble install dotenv telebot nimprotect nanoid
 
 clear
-# Build the binary
-# Build for Linux
-echo "[*] Compiling for Linux..."
-nim c ${FLAGS} --hints:off --out:${BINDIR}/${BIN} ${BIN}.nim
-
 # Build for Windows
 # echo -e "\n[*] Compiling for Windows..."
 # nim c ${FLAGS} -d:mingw --hints:off --out:${BINDIR}/${BIN}-windows.exe ${BIN}.nim
 
-echo "[*] Finished compiling!"
-echo "[*] Built binaries can be found at ${CWD}/${BINDIR}"
+# Build the binary
+# Build for Linux
+echo "[*] Compiling for Linux..."
 
-./bin/implant
+nim c ${FLAGS} --hints:off --out:${BINDIR}/${BIN} ${BIN}.nim
+
+if [[ $? -eq 0 ]]; then
+    clear
+    echo "[*] Finished compiling!"
+    echo "[*] Built binaries can be found at ${CWD}/${BINDIR}"
+    echo "[*] Running implant..."
+    ./bin/implant
+else
+    echo -e "\n\x1b[1;31m[!]\x1b[0m Error compiling binary!"
+fi
