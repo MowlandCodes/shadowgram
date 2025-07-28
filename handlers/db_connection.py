@@ -23,8 +23,8 @@ class DBConnection:
         if self.db_type == "sqlite":
             import sqlite3
 
-            conn = sqlite3.connect(f"{self.db_name}.db")
-            self.cur = conn.cursor()
+            self.conn = sqlite3.connect(f"{self.db_name}.db")
+            self.cur = self.conn.cursor()
 
         elif self.db_name == "mysql":
             import pymysql
