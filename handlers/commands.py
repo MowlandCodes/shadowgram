@@ -14,13 +14,13 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     # Send warning to user
     await context.bot.send_message(
         chat_id=CHAT_ID,
-        text="""⚠️ *An error has Occurred\\!* ⚠️
-        
-Report this problem to *@xhadow21 in Telegram*
-
+        text="""> ⚠️ *An error has Occurred\\!* ⚠️
+> 
 > For more information about the error, *check the logs*\\.
 > 
 > Log file: *shadowgram\\.log*
+>
+> if the problem persist, please report this problem to *@xhadow21 in Telegram*
 >
 > _*Do not reply to this message*_""",
         parse_mode=ParseMode.MARKDOWN_V2,
