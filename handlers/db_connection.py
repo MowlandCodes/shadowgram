@@ -54,8 +54,7 @@ class DBConnection:
                 self.conn.commit()
                 log_gram.info(f"Database {self.db_name} created!")
 
-    def insert(self, table_name: str, data: dict):
-        pass
+            self.cur = self.conn.cursor()
 
     def close(self):
         self.cur.close()
