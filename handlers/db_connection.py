@@ -6,21 +6,21 @@ class DBConnection:
 
     def __init__(
         self,
-        name: str,
+        db_type: str,
         host: str = "localhost",
         port: int = 3306,
         user: str = "root",
         password: str = "",
         db_name: str = "shadowgram",
     ):
-        self.db_name = name
+        self.db_type = db_type
         self.db_host = host
         self.db_port = port
         self.db_user = user
         self.db_password = password
         self.db_name = db_name
 
-        if self.db_name == "sqlite":
+        if self.db_type == "sqlite":
             import sqlite3
 
             conn = sqlite3.connect(f"{self.db_name}.db")
