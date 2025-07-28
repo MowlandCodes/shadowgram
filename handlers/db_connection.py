@@ -26,20 +26,33 @@ class DBConnection:
             self.conn = sqlite3.connect(f"{self.db_name}.db")
             self.cur = self.conn.cursor()
 
-        elif self.db_name == "mysql":
+        elif self.db_type == "mysql":
             import pymysql
-            import pymysql.cursors as cursors
 
-            conn = pymysql.connect(
-                host=self.db_host,
-                port=self.db_port,
-                user=self.db_user,
-                password=self.db_password,
-                database=self.db_name,
-                cursorclass=cursors.DictCursor,
-            )
+            # Check if the Database is exists, if not create one
+            try:
+                self.conn = pymysql.connect(
+                    host=self.db_host,
+                    port=self.db_port,
+                    user=self.db_user,
+                    password=self.db_password,
+                    database=self.db_name,
+                )
 
-            self.cur = conn.cursor()
+            except pymysql.err.OperationalError:
+                log_gram.warning(
+                    f"Database {self.db_name} does not exist, creating it..."
+                )
+                self.conn = pymysql.connect(
+                    host=self.db_host,
+                    port=self.db_port,
+                    user=self.db_user,
+                    password=self.db_password,
+                )
+                self.conn.cursor().execute(f"CREATE DATABASE {self.db_name}")
+                self.conn.cursor().execute(f"USE {self.db_name}")
+                self.conn.commit()
+                log_gram.info(f"Database {self.db_name} created!")
 
     def insert(self, table_name: str, data: dict):
         pass
