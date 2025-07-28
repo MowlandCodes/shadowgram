@@ -5,14 +5,21 @@ from dotenv import load_dotenv
 # Loading the Environment Variables
 load_dotenv()
 
+# Helper for getting the Environment Variable
+get = lambda name: str(os.environ.get(name))
+
 # Main Bot
-BOT_TOKEN = str(os.environ.get("BOT_TOKEN"))
-BOT_USERNAME = str(os.environ.get("BOT_USERNAME"))
-CHAT_ID = str(os.environ.get("CHAT_ID"))
+BOT_TOKEN = get("BOT_TOKEN")
+BOT_USERNAME = get("BOT_USERNAME")
+CHAT_ID = get("CHAT_ID")
 
 # Victim Bot (To interact with victim)
-ALPHA_BOT_TOKEN = str(os.environ.get("ALPHA_BOT_TOKEN"))
-ALPHA_BOT_USERNAME = str(os.environ.get("ALPHA_BOT_USERNAME"))
+ALPHA_BOT_TOKEN = get("ALPHA_BOT_TOKEN")
+ALPHA_BOT_USERNAME = get("ALPHA_BOT_USERNAME")
+
+# Channel for Bot Comms
+CHANNEL_ID = get("CHANNEL_ID")
+CHAT_ID = get("CHAT_ID")
 
 BANNER_TEXT = """```
 __| |_______________________________________________________________________________________________________________| |__
