@@ -9,6 +9,7 @@ load_dotenv()
 get = lambda name: str(os.environ.get(name))
 
 # Database Config
+DB_TYPE = get("DB_TYPE")
 DB_NAME = get("DB_NAME")
 DB_USER = get("DB_USER")
 DB_PASSWORD = get("DB_PASSWORD")
