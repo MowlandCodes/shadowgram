@@ -53,7 +53,7 @@ log_gram.setLevel(logging.DEBUG)
 
 stream_handler = logging.StreamHandler()
 stream_handler.setFormatter(ConsoleFormatter())
-file_handler = logging.FileHandler("shadowgram.log")
+file_handler = logging.FileHandler("shadowgram.log", mode="a")
 file_handler.setFormatter(FileFormatter())
 
 log_gram.addHandler(file_handler)  # For File logging
