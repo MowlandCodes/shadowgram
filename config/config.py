@@ -8,6 +8,13 @@ load_dotenv()
 # Helper for getting the Environment Variable
 get = lambda name: str(os.environ.get(name))
 
+# Database Config
+DB_NAME = get("DB_NAME")
+DB_USER = get("DB_USER")
+DB_PASSWORD = get("DB_PASSWORD")
+DB_HOST = get("DB_HOST")
+DB_PORT = get("DB_PORT")
+
 # Main Bot
 BOT_TOKEN = get("BOT_TOKEN")
 BOT_USERNAME = get("BOT_USERNAME")
