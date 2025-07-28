@@ -56,12 +56,51 @@ class DBConnection:
 
             self.cur = self.conn.cursor()
 
+    def check_table(self, table_name: str) -> bool:
+        """Check whether a table exists in the database. Return True if it does, False if not"""
+        self.cur.execute(f"SHOW TABLES")
+        result = self.cur.fetchall()
+        result = [item[0] for item in result]
+
+        if table_name not in result:
+            return False
+        else:
+            return True
+
+    def create_table(self, table_name: str, table_schema: list[str]):
+        """Create a new table with the provided schema.
+        The schema is on a list[str] format, for example:
+        [
+            "field INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT",
+            "other_field VARCHAR(50) NOT NULL",
+            "other_field_again TEXT NOT NULL",
+        ]
+        """
+        self.cur.execute(
+            f"CREATE TABLE IF NOT EXISTS {table_name} ({", ".join(table_schema)})"
+        )
+        self.conn.commit()
+
+    def insert(self, table_name: str, fields: list[str], data: list[tuple]):
+        if self.db_type == "mysql":
+            query = f"INSERT INTO {table_name} ({', '.join(fields)}) VALUES ({','.join(['%s' for _ in fields])})"
+            self.cur.executemany(query, data)
+            self.conn.commit()  # Commit the changes to database
+        elif self.db_type == "sqlite":
+            query = f"INSERT INTO {table_name} ({', '.join(fields)}) VALUES ({','.join(['?' for _ in fields])})"
+            self.cur.executemany(query, data)
+            self.conn.commit()  # Commit the changes to database
+
+    def get_all(self, table_name: str):
+        self.cur.execute(f"SELECT * FROM {table_name}")
+        return self.cur.fetchall()
+
     def close(self):
         self.cur.close()
 
 
 def connect_db(
-    name: str,
+    db_type: str,
     db_name: str,
     host: str = "localhost",
     port: int = 3306,
@@ -69,17 +108,17 @@ def connect_db(
     password: str = "",
 ) -> DBConnection | bool:
     """Connect to a Database Driver and return its cursor instance"""
-    if name == "mysql":
+    if db_type == "mysql":
         return DBConnection(
-            name=name,
+            db_type=db_type,
             host=host,
             port=port,
             user=user,
             password=password,
             db_name=db_name,
         )
-    elif name == "sqlite":
-        return DBConnection(name=name, db_name=db_name)
+    elif db_type == "sqlite":
+        return DBConnection(db_type=db_type, db_name=db_name)
     else:
-        log_gram.error(f"Unknown Database type: {name}")
+        log_gram.error(f"Unknown Database type: {db_type}")
         return False
